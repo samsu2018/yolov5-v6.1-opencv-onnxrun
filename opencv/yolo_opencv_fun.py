@@ -34,8 +34,8 @@ def object_ratio(frame, x1, y1, x2, y2):
     else:
         min_long = int(h // 2 * main_area_th)
     
-    # square size
-    cneter_x, center_y = (w // 2, h // 2) # 找到圖片中心
+    # square size with center point
+    cneter_x, center_y = (w // 2, h // 2)
     new_x1 = cneter_x - min_long
     new_y1 = center_y - min_long
     new_x2 = cneter_x + min_long
@@ -145,8 +145,8 @@ class yolov5():
             box = boxes[i]
             left = box[0]
             top = box[1]
-            width = left + box[2] # Here  coordinates calculates differently with v60
-            height = top + box[3] # Here  coordinates calculates differently with v60
+            width = left + box[2] # Differently with v60
+            height = top + box[3] # Differently with v60
             # draw bbox
             frame = self.drawPred(frame, classIds[i], confidences[i], left, top, width, height)
             # store the detection results
@@ -154,7 +154,6 @@ class yolov5():
             nms_classId = classIds[i]
             label = str(self.classes[nms_classId])
             obj_ratio = object_ratio(frame, left, top, width, height)
-            # hpc203 calculates coordinates differently with v60, 'left + width, top + height'
             nms_dets.append([label, conf, left, top, width, height, classId, obj_ratio])
         return nms_dets, frame
 
